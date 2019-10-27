@@ -1,7 +1,3 @@
-/* ========================================================================= */
-/* Copyright (C) 2017-2018 Arvid Gerstmann. All rights reserved.             */
-/* ========================================================================= */
-
 #include "utils.hpp"
 #include "reflectedclass.hpp"
 #include "fieldgenerator.hpp"

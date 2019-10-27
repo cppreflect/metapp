@@ -1,7 +1,3 @@
-/* ========================================================================= */
-/* Copyright (C) 2017-2018 Arvid Gerstmann. All rights reserved.             */
-/* ========================================================================= */
-
 #ifndef METAREFLECT_FIELD_GENERATOR_HPP
 #define METAREFLECT_FIELD_GENERATOR_HPP
 #pragma once

@@ -1,7 +1,3 @@
-/* ========================================================================= */
-/* Copyright (C) 2017-2018 Arvid Gerstmann. All rights reserved.             */
-/* ========================================================================= */
-
 #ifndef METAREFLECT_ANNOTATIONS_HPP
 #define METAREFLECT_ANNOTATIONS_HPP
 #pragma once

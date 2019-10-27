@@ -1,6 +1,3 @@
-/* ========================================================================= */
-/* Copyright (C) 2017-2018 Arvid Gerstmann. All rights reserved.             */
-/* ========================================================================= */
 #ifndef METAREFLECT_DETAIL_HXX
 #define METAREFLECT_DETAIL_HXX
 #pragma once
