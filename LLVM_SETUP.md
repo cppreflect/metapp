@@ -1,7 +1,7 @@
 # Setting Up LLVM
 
 Setting up LLVM can be quite hairy. This should guide you through the necessary
-steps to get LLVM up and running to develop metareflect.
+steps to get LLVM up and running to develop metapp.
 
 # Requirements
 
@@ -28,10 +28,10 @@ cd clang/tools
 git clone http://llvm.org/git/clang-tools-extra extra
 ```
 
-3. Clone Metareflect
+3. Clone Metapp
 ```
 cd extra
-git clone https://github.com/Leandros/metareflect.git metareflect
+git clone https://github.com/cppreflect/metapp.git metareflect
 ```
 
 4. Add Metareflect to CMakeLists.txt (assuming a posix shell)
@@ -41,20 +41,16 @@ echo "add_subdirectory(metareflect/tooling)" >> CMakeLists.txt
 
 # Building LLVM
 
-The following assumes you're working on Windows using Visual Studio.
-The steps are similar for *nix-like operating systems, simply switch out
-the Visual Studio CMake generator with `ninja`.
+The following assumes you're havin the Ninja build system installed.
 
 1. Generating CMake Build
 ```
 cd path/to/llvm/root
 mkdir build
 cd build
-cmake .. -G"Visual Studio 2017 Win64"
+cmake .. -G Ninja
 ```
 
-2. Open the resulting Visual Studio project
-
 **You're all set!**
-Navigate to the `metareflect` project to get started with development.
+Navigate to the `metapp` project to get started with development.
 
