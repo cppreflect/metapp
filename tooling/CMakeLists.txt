@@ -1,6 +1,6 @@
 set(LLVM_LINK_COMPONENTS Support)
 
-add_clang_executable(metareflect
+add_clang_executable(mpp
     reflect.cpp
     reflectedclass.cpp
     annotations.hpp
@@ -10,7 +10,7 @@ add_clang_executable(metareflect
     utils.cpp
 )
 
-target_link_libraries(metareflect
+target_link_libraries(mpp
     PRIVATE
     clangTooling
     clangBasic
