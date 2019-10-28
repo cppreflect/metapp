@@ -1,0 +1,8 @@
+Language: Cpp
+BasedOnStyle: LLVM
+IndentWidth: 2
+MaxEmptyLinesToKeep: 2
+AllowShortIfStatementsOnASingleLine: false
+AlwaysBreakBeforeMultilineStrings: false
+ColumnLimit: 80 
+BreakConstructorInitializersBeforeComma: true
