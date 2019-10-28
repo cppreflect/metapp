@@ -4,14 +4,23 @@
 #include "classfinder.hpp"
 #include "utils.hpp"
 
-static llvm::cl::OptionCategory g_ToolCategory("metareflect options");
+static llvm::cl::OptionCategory g_ToolCategory("Metapp options");
+static llvm::cl::extrahelp CommonHelp(CommonOptionsParser::HelpMessage);
+static llvm::cl::opt<std::string> outputOption("output", llvm::cl::cat{g_ToolCategory}, llvm::cl::desc{"Set the output file name"}, llvm::cl::value_desc{"filename"});
+static llvm::cl::alias outputAlias("o", llvm::cl::cat{g_ToolCategory}, llvm::cl::desc{"Alias for output"}, llvm::cl::value_desc{"filename"}, llvm::cl::aliasopt{outputOption});
+// static llvm::cl::alias outputAlias("o", llvm::cl::desc{"Set the output file name"}, llvm::cl::aliasopt{outputAlias});
 
 int
 main(int argc, const char **argv)
 {
     /* Parse command-line options. */
     CommonOptionsParser optionsParser(argc, argv, g_ToolCategory);
+    if (optionsParser.getSourcePathList().size() > 1) {
+      llvm::errs() << "More than one input file is currently not supported. Exiting.\n";
+      return 1;
+    }
     ClangTool tool(optionsParser.getCompilations(), optionsParser.getSourcePathList());
+    llvm::outs() << "GREPME " << outputOption.getValue() << '\n';
 
 #if 0
     auto &db = optionsParser.getCompilations();
@@ -27,7 +36,7 @@ main(int argc, const char **argv)
 #endif
 
     /* The classFinder class is invoked as callback. */
-    ClassFinder classFinder;
+    ClassFinder classFinder{outputOption.getValue()};
     MatchFinder finder;
 
     /* Search for all records (class/struct) with an 'annotate' attribute. */
