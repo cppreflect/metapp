@@ -14,8 +14,6 @@ static llvm::cl::alias outputAlias("o", llvm::cl::cat{g_ToolCategory},
                                    llvm::cl::desc{"Alias for output"},
                                    llvm::cl::value_desc{"filename"},
                                    llvm::cl::aliasopt{outputOption});
-// static llvm::cl::alias outputAlias("o", llvm::cl::desc{"Set the output file
-// name"}, llvm::cl::aliasopt{outputAlias});
 
 int main(int argc, const char **argv) {
   /* Parse command-line options. */
@@ -27,7 +25,6 @@ int main(int argc, const char **argv) {
   }
   ClangTool tool(optionsParser.getCompilations(),
                  optionsParser.getSourcePathList());
-  llvm::outs() << "GREPME " << outputOption.getValue() << '\n';
 
 #if 0
     auto &db = optionsParser.getCompilations();

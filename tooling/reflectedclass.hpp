@@ -35,7 +35,8 @@ public:
   /* Helper                                                   */
   /* ===--------------------------------------------------=== */
 private:
-  template <class T> Attr *GetAnnotateAttr(T *decl) {
+  template <class T>
+  Attr *GetAnnotateAttr(T *decl) {
     for (auto &attr : decl->attrs()) {
       if (attr->getKind() == attr::Annotate) {
         return attr;
