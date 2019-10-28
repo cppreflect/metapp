@@ -39,8 +39,10 @@ public:
     std::error_code ec;
     raw_fd_ostream os(m_fileName, ec);
     assert(!ec && "error opening file");
-    for (auto &ref : m_classes)
-      ref.Generate(m_context, os);
+    for (auto &ref : m_classes) {
+      // ref.Generate(m_context, os);
+      Generate(m_context, os, ref);
+    }
   }
 
 
