@@ -2,14 +2,14 @@
 #define METAREFLECT_UTILS_HPP
 #pragma once
 
-#include <string>
 #include <algorithm>
+#include <string>
 
 /* -- LLVM includes */
 #include "clang/Frontend/FrontendActions.h"
 
-#include "clang/Tooling/Tooling.h"
 #include "clang/Tooling/CommonOptionsParser.h"
+#include "clang/Tooling/Tooling.h"
 
 #include "clang/ASTMatchers/ASTMatchFinder.h"
 #include "clang/ASTMatchers/ASTMatchers.h"
@@ -28,33 +28,25 @@ using namespace llvm;
 /* ========================================================================= */
 /* STL Utils                                                                 */
 /* ========================================================================= */
-inline bool
-ends_with(std::string const &value, std::string const &ending)
-{
-    if (ending.size() > value.size())
-        return false;
+inline bool ends_with(std::string const &value, std::string const &ending) {
+  if (ending.size() > value.size())
+    return false;
 
-    return std::equal(ending.rbegin(), ending.rend(), value.rbegin());
+  return std::equal(ending.rbegin(), ending.rend(), value.rbegin());
 }
 
 /* ========================================================================= */
 /* LLVM Utils                                                                */
 /* ========================================================================= */
-QualType
-GetDesugaredType(ASTContext *ctx, QualType t);
+QualType GetDesugaredType(ASTContext *ctx, QualType t);
 
-inline void
-GetRealTypeName(ASTContext *ctx, QualType t, raw_ostream &os)
-{
-    QualType retType = GetDesugaredType(ctx, t);
-    retType.print(os, ctx->getPrintingPolicy());
+inline void GetRealTypeName(ASTContext *ctx, QualType t, raw_ostream &os) {
+  QualType retType = GetDesugaredType(ctx, t);
+  retType.print(os, ctx->getPrintingPolicy());
 }
 
-SmallString<32>
-GenerateQualifier(ASTContext *ctx, QualType type);
+SmallString<32> GenerateQualifier(ASTContext *ctx, QualType type);
 
-SmallString<8>
-PrintfFormatForType(ASTContext *ctx, QualType t);
+SmallString<8> PrintfFormatForType(ASTContext *ctx, QualType t);
 
 #endif /* METAREFLECT_UTILS_HPP */
-
