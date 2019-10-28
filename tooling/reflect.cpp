@@ -15,6 +15,10 @@ main(int argc, const char **argv)
 {
     /* Parse command-line options. */
     CommonOptionsParser optionsParser(argc, argv, g_ToolCategory);
+    if (optionsParser.getSourcePathList().size() > 1) {
+      llvm::errs() << "More than one input file is currently not supported. Exiting.\n";
+      return 1;
+    }
     ClangTool tool(optionsParser.getCompilations(), optionsParser.getSourcePathList());
     llvm::outs() << "GREPME " << outputOption.getValue() << '\n';
 
