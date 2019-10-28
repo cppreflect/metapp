@@ -9,6 +9,9 @@
 class ClassFinder : public MatchFinder::MatchCallback
 {
 public:
+  ClassFinder() = default;
+  ClassFinder(std::string fileName) : m_fileName{std::move(fileName)} {}
+
     virtual void
     run(MatchFinder::MatchResult const &result) override
     {
@@ -52,9 +55,11 @@ protected:
     void
     FoundRecord(CXXRecordDecl const *record)
     {
+      if (m_fileName.empty()) {
         m_fileName = m_sourceman->getFilename(record->getLocation());
         m_fileName.erase(m_fileName.end() - 4, m_fileName.end());
         m_fileName.append(".generated.hxx");
+      }
         m_classes.emplace_back(ReflectedClass(record));
     }
 

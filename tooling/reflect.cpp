@@ -4,14 +4,18 @@
 #include "classfinder.hpp"
 #include "utils.hpp"
 
-static llvm::cl::OptionCategory g_ToolCategory("metareflect options");
+static llvm::cl::OptionCategory g_ToolCategory("Metapp options");
+static llvm::cl::extrahelp CommonHelp(CommonOptionsParser::HelpMessage);
 
 int
 main(int argc, const char **argv)
 {
+    llvm::cl::opt<std::string> OutputOption("output", llvm::cl::cat(g_ToolCategory));
+    OutputOption.setDescription("Set the output file name");
     /* Parse command-line options. */
     CommonOptionsParser optionsParser(argc, argv, g_ToolCategory);
     ClangTool tool(optionsParser.getCompilations(), optionsParser.getSourcePathList());
+    llvm::outs() << "GREPME " << OutputOption.getValue() << '\n';
 
 #if 0
     auto &db = optionsParser.getCompilations();
@@ -27,7 +31,7 @@ main(int argc, const char **argv)
 #endif
 
     /* The classFinder class is invoked as callback. */
-    ClassFinder classFinder;
+    ClassFinder classFinder{OutputOption.getValue()};
     MatchFinder finder;
 
     /* Search for all records (class/struct) with an 'annotate' attribute. */
