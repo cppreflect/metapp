@@ -1,12 +1,19 @@
 set(LLVM_LINK_COMPONENTS Support)
 
 add_clang_executable(mpp 
-  reflect.cpp
-  reflectedclass.cpp
   annotations.hpp 
   classfinder.hpp
+  generator.hpp
+  generator_store.hpp
+  init_generators.cpp
+  init_generators.hpp
+  reflect.cpp
+  reflectedclass.cpp
   reflectedclass.hpp
+  runtime_reflection_generator.cpp
+  runtime_reflection_generator.hpp
+  utils.cpp
   utils.hpp
-  utils.cpp)
+)
 
 target_link_libraries(mpp PRIVATE clangTooling clangBasic clangASTMatchers)

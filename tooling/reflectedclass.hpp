@@ -21,22 +21,9 @@ public:
     m_functions.push_back(function);
   }
 
-  /* ===--------------------------------------------------=== */
-  /* Helper                                                   */
-  /* ===--------------------------------------------------=== */
-  friend void Generate(ASTContext *ctx, raw_ostream &os, ReflectedClass const& reflectedClass);
-
-private:
   CXXRecordDecl const *const m_record;
   std::vector<FieldDecl const *> m_fields;
   std::vector<FunctionDecl const *> m_functions;
 };
-
-/* ===--------------------------------------------------=== */
-/* Generate Annotations                                     */
-/* ===--------------------------------------------------=== */
-PropertyAnnotations GenerateFieldAttributes(StringRef const &attr);
-FunctionAnnotations GenerateFunctionAttributes(StringRef const &attr);
-void Generate(ASTContext *ctx, raw_ostream &os, ReflectedClass const& reflectedClass);
 
 #endif /* METAREFLECT_REFLECTED_CLASS_HPP */

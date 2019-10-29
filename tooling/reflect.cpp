@@ -2,6 +2,8 @@
 
 #include "annotations.hpp"
 #include "classfinder.hpp"
+#include "generator_store.hpp"
+#include "init_generators.hpp"
 #include "utils.hpp"
 
 static llvm::cl::OptionCategory g_ToolCategory("Metapp options");
@@ -39,8 +41,10 @@ int main(int argc, const char **argv) {
     }
 #endif
 
+  auto generators = metapp::init_generators();
+
   /* The classFinder class is invoked as callback. */
-  ClassFinder classFinder{outputOption.getValue()};
+  ClassFinder classFinder{outputOption.getValue(), std::move(generators)};
   MatchFinder finder;
 
   /* Search for all records (class/struct) with an 'annotate' attribute. */
