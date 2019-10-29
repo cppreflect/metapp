@@ -2,15 +2,19 @@
 #define METAREFLECT_CLASSFINDER_HPP
 #pragma once
 
+#include "generator.hpp"
+#include "generator_store.hpp"
 #include "reflectedclass.hpp"
 #include "utils.hpp"
 
 
 class ClassFinder : public MatchFinder::MatchCallback {
 public:
-  ClassFinder() = default;
-  ClassFinder(std::string fileName)
-      : m_fileName{std::move(fileName)} {}
+  // ClassFinder() = default;
+  ClassFinder(std::string fileName,
+              std::shared_ptr<metapp::GeneratorStore> generators)
+      : m_fileName{std::move(fileName)}
+      , m_generators{std::move(generators)} {}
 
   virtual void run(MatchFinder::MatchResult const &result) override {
     m_context = result.Context;
@@ -39,8 +43,11 @@ public:
     std::error_code ec;
     raw_fd_ostream os(m_fileName, ec);
     assert(!ec && "error opening file");
-    for (auto &ref : m_classes)
-      ref.Generate(m_context, os);
+    for (auto &ref : m_classes) {
+      // ref.Generate(m_context, os);
+      auto generator = m_generators->mockGet("som");
+      generator->generate(m_context, os, ref);
+    }
   }
 
 
@@ -65,6 +72,7 @@ protected:
   SourceManager *m_sourceman;
   std::vector<ReflectedClass> m_classes;
   std::string m_fileName;
+  std::shared_ptr<metapp::GeneratorStore> m_generators;
 };
 
 #endif /* METAREFLECT_CLASSFINDER_HPP */
