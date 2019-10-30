@@ -6,6 +6,7 @@
 namespace metapp {
 
 struct Generator {
+  virtual ~Generator() = default;
   std::string m_name;
   std::string name() { return m_name; }
   void name(std::string name) { m_name = std::move(name); }
