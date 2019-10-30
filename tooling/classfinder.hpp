@@ -45,8 +45,12 @@ public:
     assert(!ec && "error opening file");
     for (auto &ref : m_classes) {
       // ref.Generate(m_context, os);
-      auto generator = m_generators->mockGet("som");
-      generator->generate(m_context, os, ref);
+      try {
+        auto generator = m_generators->mockGet("some_generator");
+        generator->generate(m_context, os, ref);
+      } catch (const std::runtime_error& err) {
+        llvm::errs() << err.what() << '\n';
+      }
     }
   }
 

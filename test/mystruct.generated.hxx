@@ -1,49 +1,14 @@
-/* this file is auto-generated. do not edit! */
-#pragma once
-#include "metareflect.hxx"
-namespace metareflect
-{
-
-template<> struct IsSerializable<Foo> { static constexpr bool value = false; };
-template<> struct HasBeforeSerialize<Foo> { static constexpr bool value = false; };
-template<> struct HasAfterSerialize<Foo> { static constexpr bool value = false; };
-template<> struct HasCustomSerialize<Foo> { static constexpr bool value = false; };
-template<> struct HasCustomDump<Foo> { static constexpr bool value = false; };
-namespace detail
-{
-template<>
-Class const *
-GetClassImpl(ClassTag<Foo>) noexcept
-{
-static detail::ClassStorage<Foo, 1, 0> reflected([](auto self) {
-
-/* Field 1 */
-self->fields[0].m_type = GetType<int>();
-self->fields[0].m_flags = Field::kFlagsNull;
-self->fields[0].m_serializedWidth = sizeof(int) * 8;
-self->fields[0].m_offset = offsetof(Foo, bar);
-self->fields[0].m_qualifier = Qualifier(0, 0, 0, 0, 0, 0);
-self->fields[0].m_name = "bar";
-});
-static Class cache(
-sizeof(Foo),
-Hash("Foo"),
-nullptr/*TODO: baseclass*/,
-reflected.fields,
-reflected.fields + reflected.numFields,
-reflected.functions,
-reflected.functions + reflected.numFunctions,
-"Foo",
-Class::kFlagsNull);
-return &cache;
+template <class Inspector>
+typename Inspector::result_type inspect(Inspector& f, Bar::Foo& x) {
+  return f("Bar::Foo"
+   , x.bar
+   , x.foo
+   , x.mail
+  );
 }
 
-template<>
-Type const *
-GetTypeImpl(TypeTag<Foo>) noexcept
-{
-return GetClass<Foo>();
+void to_json(nlohmann::json& data, const Bar::Foo& t) {
+  data["bar"] = field;
+  data["foo"] = field;
+  data["mail"] = field;
 }
-} /* namespace detail */
-} /* namespace metareflect */
-

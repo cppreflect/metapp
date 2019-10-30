@@ -7,6 +7,7 @@ add_clang_executable(mpp
   generator_store.hpp
   init_generators.cpp
   init_generators.hpp
+  template_generator.hpp
   reflect.cpp
   reflectedclass.cpp
   reflectedclass.hpp
@@ -16,4 +17,5 @@ add_clang_executable(mpp
   utils.hpp
 )
 
-target_link_libraries(mpp PRIVATE clangTooling clangBasic clangASTMatchers)
+target_compile_options(mpp PRIVATE -fexceptions)
+target_link_libraries(mpp PRIVATE templatingLib clangTooling clangBasic clangASTMatchers)

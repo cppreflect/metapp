@@ -31,12 +31,12 @@ git clone http://llvm.org/git/clang-tools-extra extra
 3. Clone Metapp
 ```
 cd extra
-git clone https://github.com/cppreflect/metapp.git metareflect
+git clone https://github.com/cppreflect/metapp.git
 ```
 
 4. Add Metareflect to CMakeLists.txt (assuming a posix shell)
 ```
-echo "add_subdirectory(metareflect/tooling)" >> CMakeLists.txt
+echo "add_subdirectory(metapp)" >> CMakeLists.txt
 ```
 
 # Building LLVM
