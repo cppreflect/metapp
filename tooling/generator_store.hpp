@@ -24,7 +24,7 @@ struct GeneratorStore {
   }
 
   Generator *mockGet(std::string name) {
-    auto i = tryGet("RuntimeReflectionGenerator");
+    auto i = tryGet("TemplateGenerator");
 
     if (i == nullptr) {
       std::cout << "VRISTI" << std::endl;

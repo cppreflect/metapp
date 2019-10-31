@@ -1,3 +1,13 @@
+### Build dir ###
+build
+
+### Third party libraries ###
+third_party/include
+
+### ccls config ###
+.ccls
+compile_commands.json
+
 ### C++ ###
 # Prerequisites
 *.d

@@ -6,7 +6,7 @@
 #include "init_generators.hpp"
 #include "utils.hpp"
 
-static llvm::cl::OptionCategory g_ToolCategory("Metapp options");
+llvm::cl::OptionCategory g_ToolCategory("Metapp options");
 static llvm::cl::extrahelp CommonHelp(CommonOptionsParser::HelpMessage);
 static llvm::cl::opt<std::string>
     outputOption("output", llvm::cl::cat{g_ToolCategory},

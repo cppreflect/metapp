@@ -1,0 +1,14 @@
+template <class Inspector>
+typename Inspector::result_type inspect(Inspector& f, {{type}}& x) {
+  return f("{{type}}"
+## for field in fields
+   , x.{{ field }}
+## endfor
+  );
+}
+
+void to_json(nlohmann::json& data, const {{type}}& t) {
+## for field in fields 
+  data["{{field}}"] = field;
+## endfor
+}
