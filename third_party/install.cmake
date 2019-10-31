@@ -14,6 +14,12 @@ if (NOT EXISTS "${INJA_FILE}")
   file(DOWNLOAD "${INJA_URL}" "${INJA_FILE}")
 endif()
 
+add_library(nlohmann_json INTERFACE) 
+target_include_directories(nlohmann_json INTERFACE "${JSON_INCLUDE_DIR}")
 
-add_library(templatingLib INTERFACE) 
-target_include_directories(templatingLib INTERFACE "${JSON_INCLUDE_DIR}")
+add_library(inja_lib INTERFACE) 
+target_include_directories(inja_lib INTERFACE "${INJA_INCLUDE_DIR}")
+target_link_libraries(inja_lib INTERFACE nlohmann_json)
+
+# add_library(templatingLib INTERFACE) 
+# target_include_directories(templatingLib INTERFACE "${JSON_INCLUDE_DIR}")

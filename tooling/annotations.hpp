@@ -1,5 +1,5 @@
-#ifndef METAREFLECT_ANNOTATIONS_HPP
-#define METAREFLECT_ANNOTATIONS_HPP
+#ifndef LLVM_CLANG_TOOLS_EXTRA_METAPP_TOOLING_ANNOTATIONS_HPP
+#define LLVM_CLANG_TOOLS_EXTRA_METAPP_TOOLING_ANNOTATIONS_HPP
 #pragma once
 
 #include "utils.hpp"
@@ -117,5 +117,4 @@ inline raw_ostream &operator<<(raw_ostream &os,
   return os;
 }
 
-
-#endif /* METAREFLECT_ANNOTATIONS_HPP */
+#endif // LLVM_CLANG_TOOLS_EXTRA_METAPP_TOOLING_ANNOTATIONS_HPP
