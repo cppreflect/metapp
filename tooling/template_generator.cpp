@@ -32,7 +32,7 @@ void TemplateGenerator::setup() {
                            std::istreambuf_iterator<char>()};
 }
 
-void TemplateGenerator::generate(ASTContext *ctx, raw_ostream &os,
+void TemplateGenerator::generate(clang::ASTContext *ctx, raw_ostream &os,
                                  ReflectedClass const &reflectedClass) const {
   // Just for convenience
   using namespace inja;

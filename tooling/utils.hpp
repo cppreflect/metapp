@@ -19,7 +19,7 @@
 /* Declares llvm::cl::extrahelp. */
 #include "llvm/Support/CommandLine.h"
 
-using namespace clang;
+// using namespace clang;
 using namespace clang::tooling;
 using namespace clang::ast_matchers;
 using namespace llvm;
@@ -38,15 +38,15 @@ inline bool ends_with(std::string const &value, std::string const &ending) {
 /* ========================================================================= */
 /* LLVM Utils                                                                */
 /* ========================================================================= */
-QualType GetDesugaredType(ASTContext *ctx, QualType t);
+clang::QualType GetDesugaredType(clang::ASTContext *ctx, clang::QualType t);
 
-inline void GetRealTypeName(ASTContext *ctx, QualType t, raw_ostream &os) {
-  QualType retType = GetDesugaredType(ctx, t);
+inline void GetRealTypeName(clang::ASTContext *ctx, clang::QualType t, raw_ostream &os) {
+  clang::QualType retType = GetDesugaredType(ctx, t);
   retType.print(os, ctx->getPrintingPolicy());
 }
 
-SmallString<32> GenerateQualifier(ASTContext *ctx, QualType type);
+clang::SmallString<32> GenerateQualifier(clang::ASTContext *ctx, clang::QualType type);
 
-SmallString<8> PrintfFormatForType(ASTContext *ctx, QualType t);
+clang::SmallString<8> PrintfFormatForType(clang::ASTContext *ctx, clang::QualType t);
 
 #endif // LLVM_CLANG_TOOLS_EXTRA_METAPP_TOOLING_UTILS_HPP

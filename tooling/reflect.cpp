@@ -49,17 +49,17 @@ int main(int argc, const char **argv) {
 
   /* Search for all records (class/struct) with an 'annotate' attribute. */
   static DeclarationMatcher const classMatcher =
-      cxxRecordDecl(decl().bind("id"), hasAttr(attr::Annotate));
+      cxxRecordDecl(decl().bind("id"), hasAttr(clang::attr::Annotate));
   finder.addMatcher(classMatcher, &classFinder);
 
   /* Search for all fields with an 'annotate' attribute. */
   static DeclarationMatcher const propertyMatcher =
-      fieldDecl(decl().bind("id"), hasAttr(attr::Annotate));
+      fieldDecl(decl().bind("id"), hasAttr(clang::attr::Annotate));
   finder.addMatcher(propertyMatcher, &classFinder);
 
   /* Search for all functions with an 'annotate' attribute. */
   static DeclarationMatcher const functionMatcher =
-      functionDecl(decl().bind("id"), hasAttr(attr::Annotate));
+      functionDecl(decl().bind("id"), hasAttr(clang::attr::Annotate));
   finder.addMatcher(functionMatcher, &classFinder);
 
   return tool.run(newFrontendActionFactory(&finder).get());

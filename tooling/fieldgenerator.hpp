@@ -15,7 +15,7 @@ inline raw_ostream &operator<<(raw_ostream &os, PropertyAnnotations &p) {
 /* Field Generator                                                           */
 /* ========================================================================= */
 struct FieldGenerator {
-  ASTContext *const ctx;
+  clang::ASTContext *const ctx;
   SmallString<64> fieldName;
   SmallString<64> typeName;
   raw_svector_ostream fieldNameOs{fieldName};
@@ -23,13 +23,13 @@ struct FieldGenerator {
   StringRef const type;
   std::string const fieldPrefix;
 
-  explicit FieldGenerator(ASTContext *context, StringRef const &parentType,
+  explicit FieldGenerator(clang::ASTContext *context, StringRef const &parentType,
                           StringRef const &prefix)
       : ctx(context)
       , type(parentType)
       , fieldPrefix(prefix) {}
 
-  void Generate(unsigned i, FieldDecl const *field,
+  void Generate(unsigned i, clang::FieldDecl const *field,
                 PropertyAnnotations &annotations, raw_ostream &os) {
     fieldName.clear();
     typeName.clear();

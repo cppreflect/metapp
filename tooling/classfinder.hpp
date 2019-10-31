@@ -20,16 +20,16 @@ public:
     m_context = result.Context;
     m_sourceman = result.SourceManager;
 
-    CXXRecordDecl const *record =
+    clang::CXXRecordDecl const *record =
         result.Nodes.getNodeAs<clang::CXXRecordDecl>("id");
     if (record)
       return FoundRecord(record);
 
-    FieldDecl const *field = result.Nodes.getNodeAs<clang::FieldDecl>("id");
+    clang::FieldDecl const *field = result.Nodes.getNodeAs<clang::FieldDecl>("id");
     if (field)
       return FoundField(field);
 
-    FunctionDecl const *function =
+    clang::FunctionDecl const *function =
         result.Nodes.getNodeAs<clang::FunctionDecl>("id");
     if (function)
       return FoundFunction(function);
@@ -56,7 +56,7 @@ public:
 
 
 protected:
-  void FoundRecord(CXXRecordDecl const *record) {
+  void FoundRecord(clang::CXXRecordDecl const *record) {
     if (m_fileName.empty()) {
       m_fileName = m_sourceman->getFilename(record->getLocation());
       m_fileName.erase(m_fileName.end() - 4, m_fileName.end());
@@ -65,15 +65,15 @@ protected:
     m_classes.emplace_back(ReflectedClass(record));
   }
 
-  void FoundField(FieldDecl const *field) { m_classes.back().AddField(field); }
+  void FoundField(clang::FieldDecl const *field) { m_classes.back().AddField(field); }
 
-  void FoundFunction(FunctionDecl const *function) {
+  void FoundFunction(clang::FunctionDecl const *function) {
     m_classes.back().AddFunction(function);
   }
 
 protected:
-  ASTContext *m_context;
-  SourceManager *m_sourceman;
+  clang::ASTContext *m_context;
+  clang::SourceManager *m_sourceman;
   std::vector<ReflectedClass> m_classes;
   std::string m_fileName;
   std::shared_ptr<metapp::GeneratorStore> m_generators;

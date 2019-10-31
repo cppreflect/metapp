@@ -1,7 +1,7 @@
 #include "utils.hpp"
 
-struct TypeVisitor : public RecursiveASTVisitor<TypeVisitor> {
-  explicit TypeVisitor(ASTContext *context)
+struct TypeVisitor : public clang::RecursiveASTVisitor<TypeVisitor> {
+  explicit TypeVisitor(clang::ASTContext *context)
       : m_context(context) {}
 
   bool VisitType(clang::Type *type) {
@@ -9,30 +9,30 @@ struct TypeVisitor : public RecursiveASTVisitor<TypeVisitor> {
     return true;
   }
 
-  ASTContext *m_context;
+  clang::ASTContext *m_context;
   clang::Type *m_leaf;
 };
 
-QualType GetDesugaredType(ASTContext *ctx, QualType t) {
+clang::QualType GetDesugaredType(clang::ASTContext *ctx, clang::QualType t) {
   auto type = t.split().Ty;
 
   clang::BuiltinType const *builtin = type->getAs<clang::BuiltinType>();
   if (builtin) {
-    return QualType(builtin, 0);
+    return clang::QualType(builtin, 0);
   }
 
   clang::RecordType const *record = type->getAs<clang::RecordType>();
   if (record) {
-    return QualType(record, 0);
+    return clang::QualType(record, 0);
   }
 
   /* Fallback to traversing the type manually. */
   TypeVisitor visitor(ctx);
   visitor.TraverseType(t);
-  return QualType(visitor.m_leaf, 0);
+  return clang::QualType(visitor.m_leaf, 0);
 }
 
-SmallString<32> GenerateQualifier(ASTContext *ctx, QualType type) {
+SmallString<32> GenerateQualifier(clang::ASTContext *ctx, clang::QualType type) {
   clang::Type const *t = type.getTypePtrOrNull();
 
   /* CV Qualifier: */
@@ -79,8 +79,8 @@ SmallString<32> GenerateQualifier(ASTContext *ctx, QualType type) {
   return out;
 }
 
-SmallString<8> PrintfFormatForType(ASTContext *ctx, QualType t) {
-  QualType desugared = GetDesugaredType(ctx, t);
+SmallString<8> PrintfFormatForType(clang::ASTContext *ctx, clang::QualType t) {
+  clang::QualType desugared = GetDesugaredType(ctx, t);
   clang::Type const *type = desugared.getTypePtrOrNull();
   if (type == nullptr) {
     printf("TODO: TYPE IS NULLPTR\n");
@@ -90,28 +90,28 @@ SmallString<8> PrintfFormatForType(ASTContext *ctx, QualType t) {
   bool isFundamental = type->isFundamentalType();
   printf("isFundamental: %d\n", isFundamental);
   if (isFundamental) {
-    clang::BuiltinType const *builtin = type->getAs<BuiltinType>();
+    clang::BuiltinType const *builtin = type->getAs<clang::BuiltinType>();
     switch (builtin->getKind()) {
-    case BuiltinType::Kind::Bool:
-    case BuiltinType::Kind::SChar:
-    case BuiltinType::Kind::Short:
-    case BuiltinType::Kind::Int:
+      case clang::BuiltinType::Kind::Bool:
+      case clang::BuiltinType::Kind::SChar:
+      case clang::BuiltinType::Kind::Short:
+      case clang::BuiltinType::Kind::Int:
       return SmallString<8>("%d");
-    case BuiltinType::Kind::UChar:
-    case BuiltinType::Kind::UShort:
-    case BuiltinType::Kind::UInt:
+      case clang::BuiltinType::Kind::UChar:
+      case clang::BuiltinType::Kind::UShort:
+      case clang::BuiltinType::Kind::UInt:
       return SmallString<8>("%u");
-    case BuiltinType::Kind::Long:
+      case clang::BuiltinType::Kind::Long:
       return SmallString<8>("%ld");
-    case BuiltinType::Kind::ULong:
+      case clang::BuiltinType::Kind::ULong:
       return SmallString<8>("%lu");
-    case BuiltinType::Kind::LongLong:
+      case clang::BuiltinType::Kind::LongLong:
       return SmallString<8>("%lld");
-    case BuiltinType::Kind::ULongLong:
+      case clang::BuiltinType::Kind::ULongLong:
       return SmallString<8>("%llu");
-    case BuiltinType::Kind::Float:
-    case BuiltinType::Kind::Double:
-    case BuiltinType::Kind::LongDouble:
+      case clang::BuiltinType::Kind::Float:
+      case clang::BuiltinType::Kind::Double:
+      case clang::BuiltinType::Kind::LongDouble:
       return SmallString<8>("%f");
     default:
       break;

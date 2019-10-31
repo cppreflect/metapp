@@ -4,6 +4,8 @@
 #include "reflectedclass.hpp"
 #include "utils.hpp"
 
+using namespace clang;
+
 namespace {
 
 template <unsigned N>

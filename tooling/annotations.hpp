@@ -58,7 +58,7 @@ struct PropertyAnnotations {
   bool isCString : 1;
   unsigned width : 8;
 
-  bool IsSerializable(ASTContext *ctx, FieldDecl const *field) {
+  bool IsSerializable(clang::ASTContext *ctx, clang::FieldDecl const *field) {
     auto t = GetDesugaredType(ctx, field->getType());
     if (!t.isPODType(*ctx) && serialized)
       return false;

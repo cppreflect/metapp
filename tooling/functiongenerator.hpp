@@ -9,7 +9,7 @@
 /* Function Generator                                                        */
 /* ========================================================================= */
 struct FunctionGenerator {
-  ASTContext *const ctx;
+  clang::ASTContext *const ctx;
   SmallString<64> funcName;
   SmallString<64> typeName;
   raw_svector_ostream funcNameOs{funcName};
@@ -17,13 +17,13 @@ struct FunctionGenerator {
   StringRef const type;
   StringRef const fieldPrefix;
 
-  explicit FunctionGenerator(ASTContext *context, StringRef const &parentType,
+  explicit FunctionGenerator(clang::ASTContext *context, StringRef const &parentType,
                              StringRef const &prefix)
       : ctx(context)
       , type(parentType)
       , fieldPrefix(prefix) {}
 
-  void Generate(unsigned i, FunctionDecl const *func,
+  void Generate(unsigned i, clang::FunctionDecl const *func,
                 FunctionAnnotations &annotations, raw_ostream &os) {
     funcName.clear();
     func->printName(funcNameOs);
@@ -46,7 +46,7 @@ struct FunctionGenerator {
     /* prefix() << ".m_pointer = */
   }
 
-  void GenerateReturnType(unsigned i, FunctionDecl const *func,
+  void GenerateReturnType(unsigned i, clang::FunctionDecl const *func,
                           FunctionAnnotations &annotations, raw_ostream &os) {
     typeName.clear();
     GetRealTypeName(ctx, func->getReturnType(), TypeNameOs);
@@ -70,7 +70,7 @@ struct FunctionGenerator {
        << ";\n";
   }
 
-  void GenerateArguments(unsigned index, FunctionDecl const *func,
+  void GenerateArguments(unsigned index, clang::FunctionDecl const *func,
                          FunctionAnnotations &annotations, raw_ostream &os) {
     SmallString<64> paramName;
     raw_svector_ostream paramNameOs(paramName);
