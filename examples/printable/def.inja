@@ -1,0 +1,11 @@
+#include <iostream>
+
+
+std::ostream& operator<<(std::ostream& out, const {{type}}& x) {
+  out
+## for field in fields
+    << x.{{field}} << ' '
+## endfor
+    << std::endl;
+    return out;
+}
