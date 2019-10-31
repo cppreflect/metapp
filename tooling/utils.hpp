@@ -1,5 +1,5 @@
-#ifndef METAREFLECT_UTILS_HPP
-#define METAREFLECT_UTILS_HPP
+#ifndef LLVM_CLANG_TOOLS_EXTRA_METAPP_TOOLING_UTILS_HPP
+#define LLVM_CLANG_TOOLS_EXTRA_METAPP_TOOLING_UTILS_HPP
 #pragma once
 
 #include <algorithm>
@@ -49,4 +49,4 @@ SmallString<32> GenerateQualifier(ASTContext *ctx, QualType type);
 
 SmallString<8> PrintfFormatForType(ASTContext *ctx, QualType t);
 
-#endif /* METAREFLECT_UTILS_HPP */
+#endif // LLVM_CLANG_TOOLS_EXTRA_METAPP_TOOLING_UTILS_HPP

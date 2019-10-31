@@ -1,11 +1,9 @@
-// clang-format off
-#include <nlohmann/json.hpp>
 #include <inja/inja.hpp>
-// clang-format on
+#include <nlohmann/json.hpp>
 
-#include "template_generator.hpp"
 #include "command_line.hpp"
 #include "generator.hpp"
+#include "template_generator.hpp"
 #include "utils.hpp"
 
 #include <exception>

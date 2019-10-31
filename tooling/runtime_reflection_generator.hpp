@@ -1,3 +1,5 @@
+#ifndef LLVM_CLANG_TOOLS_EXTRA_METAPP_TOOLING_RUNTIME_REFLECTION_GENERATOR_HPP
+#define LLVM_CLANG_TOOLS_EXTRA_METAPP_TOOLING_RUNTIME_REFLECTION_GENERATOR_HPP
 #pragma once
 
 #include "generator.hpp"
@@ -14,3 +16,5 @@ struct RuntimeReflectionGenerator : public Generator {
 };
 
 } // namespace metapp
+
+#endif // LLVM_CLANG_TOOLS_EXTRA_METAPP_TOOLING_RUNTIME_REFLECTION_GENERATOR_HPP

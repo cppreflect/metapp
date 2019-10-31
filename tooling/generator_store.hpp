@@ -1,3 +1,5 @@
+#ifndef LLVM_CLANG_TOOLS_EXTRA_METAPP_TOOLING_GENERATOR_STORE_HPP
+#define LLVM_CLANG_TOOLS_EXTRA_METAPP_TOOLING_GENERATOR_STORE_HPP
 #pragma once
 
 #include "generator.hpp"
@@ -35,3 +37,5 @@ struct GeneratorStore {
 };
 
 } // namespace metapp
+
+#endif // LLVM_CLANG_TOOLS_EXTRA_METAPP_TOOLING_GENERATOR_STORE_HPP

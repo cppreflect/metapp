@@ -1,5 +1,5 @@
-#ifndef METAREFLECT_CLASSFINDER_HPP
-#define METAREFLECT_CLASSFINDER_HPP
+#ifndef LLVM_CLANG_TOOLS_EXTRA_METAPP_TOOLING_CLASSFINDER_HPP
+#define LLVM_CLANG_TOOLS_EXTRA_METAPP_TOOLING_CLASSFINDER_HPP
 #pragma once
 
 #include "generator.hpp"
@@ -79,4 +79,4 @@ protected:
   std::shared_ptr<metapp::GeneratorStore> m_generators;
 };
 
-#endif /* METAREFLECT_CLASSFINDER_HPP */
+#endif // LLVM_CLANG_TOOLS_EXTRA_METAPP_TOOLING_CLASSFINDER_HPP

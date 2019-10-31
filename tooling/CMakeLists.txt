@@ -20,4 +20,4 @@ add_clang_executable(mpp
 )
 
 target_compile_options(mpp PRIVATE -fexceptions)
-target_link_libraries(mpp PRIVATE templatingLib clangTooling clangBasic clangASTMatchers)
+target_link_libraries(mpp PRIVATE nlohmann_json inja_lib clangTooling clangBasic clangASTMatchers)

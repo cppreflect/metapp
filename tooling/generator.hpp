@@ -1,3 +1,5 @@
+#ifndef LLVM_CLANG_TOOLS_EXTRA_METAPP_TOOLING_GENERATOR_HPP
+#define LLVM_CLANG_TOOLS_EXTRA_METAPP_TOOLING_GENERATOR_HPP
 #pragma once
 
 #include "reflectedclass.hpp"
@@ -16,3 +18,5 @@ struct Generator {
 };
 
 } // namespace metapp
+
+#endif // LLVM_CLANG_TOOLS_EXTRA_METAPP_TOOLING_GENERATOR_HPP
