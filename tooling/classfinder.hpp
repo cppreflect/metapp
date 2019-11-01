@@ -25,7 +25,8 @@ public:
     if (record)
       return FoundRecord(record);
 
-    clang::FieldDecl const *field = result.Nodes.getNodeAs<clang::FieldDecl>("id");
+    clang::FieldDecl const *field =
+        result.Nodes.getNodeAs<clang::FieldDecl>("id");
     if (field)
       return FoundField(field);
 
@@ -48,7 +49,7 @@ public:
       try {
         auto generator = m_generators->mockGet("some_generator");
         generator->generate(m_context, os, ref);
-      } catch (const std::runtime_error& err) {
+      } catch (const std::runtime_error &err) {
         llvm::errs() << err.what() << '\n';
       }
     }
@@ -62,10 +63,21 @@ protected:
       m_fileName.erase(m_fileName.end() - 4, m_fileName.end());
       m_fileName.append(".generated.hxx");
     }
-    m_classes.emplace_back(ReflectedClass(record));
+
+    clang::DeclContext const *decl_context =
+        record->getEnclosingNamespaceContext();
+    clang::NamespaceDecl const *namesp = nullptr;
+
+    if (decl_context->isNamespace()) {
+      namesp = clang::cast<clang::NamespaceDecl>(decl_context);
+    }
+
+    m_classes.emplace_back(ReflectedClass(namesp, record));
   }
 
-  void FoundField(clang::FieldDecl const *field) { m_classes.back().AddField(field); }
+  void FoundField(clang::FieldDecl const *field) {
+    m_classes.back().AddField(field);
+  }
 
   void FoundFunction(clang::FunctionDecl const *function) {
     m_classes.back().AddFunction(function);

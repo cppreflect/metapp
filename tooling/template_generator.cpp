@@ -47,19 +47,14 @@ void TemplateGenerator::generate(clang::ASTContext *ctx, raw_ostream &os,
   data["type"] = std::string{type.begin(), type.end()};
   type.clear();
 
-  auto nsDcl = reflectedClass.m_record->getEnclosingNamespaceContext()->getAs<clang::NamespaceDecl>();
-  if (nsDcl->isNamespace()) {
-    auto nameDcl = clang::cast<clang::NamespaceDecl>(nsDcl);
-    nameDcl->printQualifiedName(stos);
+  if (reflectedClass.m_namespace) {
+    reflectedClass.m_namespace->printQualifiedName(stos);
     data["qualifiedNamespace"] = std::string{type.begin(), type.end()};
     type.clear();
-    nameDcl->printName(stos);
+    reflectedClass.m_namespace->printName(stos);
     data["namespace"] = std::string{type.begin(), type.end()};
     type.clear();
-  } else {
-    data["qualifiedNamespace"] = "";
-    data["namespace"] = "";
-  }
+  } 
 
   std::vector<std::string> fields;
   for (const auto &field : reflectedClass.m_fields) {

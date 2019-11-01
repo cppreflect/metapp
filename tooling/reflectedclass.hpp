@@ -8,8 +8,11 @@
 
 class ReflectedClass {
 public:
-  ReflectedClass(clang::CXXRecordDecl const *rec)
-      : m_record(rec) {}
+  ReflectedClass(clang::NamespaceDecl const *namesp,
+                 clang::CXXRecordDecl const *rec)
+      : m_namespace{namesp}
+      , m_record(rec) {}
+
 
   /* ===--------------------------------------------------=== */
   /* Public API                                               */
@@ -21,6 +24,7 @@ public:
     m_functions.push_back(function);
   }
 
+  clang::NamespaceDecl const *const m_namespace;
   clang::CXXRecordDecl const *const m_record;
   std::vector<clang::FieldDecl const *> m_fields;
   std::vector<clang::FunctionDecl const *> m_functions;

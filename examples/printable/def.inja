@@ -1,7 +1,6 @@
 #include <iostream>
 
-namespace {{qualifiedNamespace}} { 
-namespace {{namespace}} { 
+{% if exists("qualifiedNamespace") %}namespace {{qualifiedNamespace}} { {% endif %}
 
 std::ostream& operator<<(std::ostream& out, const {{type}}& x) {
   out
@@ -12,5 +11,5 @@ std::ostream& operator<<(std::ostream& out, const {{type}}& x) {
     return out;
 }
 
-}
-}
+{% if exists("qualifiedNamespace") %}} // namespace {{qualifiedNamespace}}{% endif %}
+
