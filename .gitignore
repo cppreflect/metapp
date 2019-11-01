@@ -1,5 +1,7 @@
 ### Build dir ###
 build
+examples/printable/complex_gen.hpp
+examples/printable/build
 
 ### Third party libraries ###
 third_party/include

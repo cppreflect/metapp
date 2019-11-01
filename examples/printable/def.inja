@@ -1,5 +1,7 @@
 #include <iostream>
 
+namespace {{qualifiedNamespace}} { 
+namespace {{namespace}} { 
 
 std::ostream& operator<<(std::ostream& out, const {{type}}& x) {
   out
@@ -8,4 +10,7 @@ std::ostream& operator<<(std::ostream& out, const {{type}}& x) {
 ## endfor
     << std::endl;
     return out;
+}
+
+}
 }
