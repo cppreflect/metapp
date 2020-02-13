@@ -77,7 +77,7 @@ std::ostream& operator<<(std::ostream& out, const Complex& x) {
 
 ```
 
-For the full example take a look at our [`/examples`](/example).
+For the full example take a look at the examples directory.
 
 # Contributing
 
