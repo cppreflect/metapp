@@ -1,16 +1,16 @@
 # Metapp
 
-Metapp is a lightweight side compiler, a tool for static reflection 
-and code generation. It is intended for C++ and is based on LLVM and 
+Metapp is a lightweight side compiler, a tool for static reflection
+and code generation. It is intended for C++ and is based on LLVM and
 Clangs libtooling.
 
 It's inpired on regen, cxxctp and metareflect, out of which only cxxctp seems
 in active development. It is intended to support the custom templating engine
-of regen, the user pluggable features of cxxctp and combine them with the 
-approach of metareflect and utilize the most of Clangs libtooling. 
+of regen, the user pluggable features of cxxctp and combine them with the
+approach of metareflect and utilize the most of Clangs libtooling.
 
-It was forked from the great work of 
-[Metareflect](https://github.com/leandros/metareflect), 
+It was forked from the great work of
+[Metareflect](https://github.com/leandros/metareflect),
 the project seems now inactive.
 
 # Getting Started
@@ -19,35 +19,65 @@ the project seems now inactive.
 
 Every class which you want to be reflected needs to be annotated.
 
-**point.hxx:**
-    CLASS() Point
-    {
-    public:
-        PROPERTY()
-        int x;
+**complex.hpp:**
 
-        PROPERTY()
-        int y;
+```cpp
+#define STRUCT struct __attribute__((annotate("reflect-class")))
 
-        PROPERTY()
-        int z;
+namespace cxCom {
 
-        FUNCTION()
-        size_t Hash() const
-        {
-            return x ^ y ^ z;
-        }
-    };
+STRUCT Complex {
+  double real;
+  double imaginary;
+};
 
-**point.cxx:**
+}
+```
 
-    #include "point.hxx"
-    #include "point.generated.hxx"
+After that, you define the template how you would want the genrated code to look
+like:
 
-    /* rest of the code */
+**printable.inja**
 
+```cpp
+#include <iostream>
 
-For a full example take a look at our [`/example`](/example).
+{% if exists("qualifiedNamespace") %}namespace {{qualifiedNamespace}} { {% endif %}
+
+std::ostream& operator<<(std::ostream& out, const {{type}}& x) {
+  out
+## for field in fields
+    << x.{{field}} << ' '
+## endfor
+    << std::endl;
+    return out;
+}
+
+{% if exists("qualifiedNamespace") %}} // namespace {{qualifiedNamespace}}{% endif %}
+```
+
+The generated code for the above would look like this:
+
+**complex_generated.hpp:**
+
+```cpp
+#include <iostream>
+
+namespace cxCom {
+
+std::ostream& operator<<(std::ostream& out, const Complex& x) {
+  out
+    << x.real << ' '
+    << x.imaginary << ' '
+    << std::endl;
+    return out;
+}
+
+} // namespace cxCom
+
+```
+
+For the full example take a look at our [`/examples`](/example).
 
 # Contributing
 
